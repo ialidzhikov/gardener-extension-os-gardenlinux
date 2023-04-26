@@ -1,0 +1,34 @@
+image:
+  repository: eu.gcr.io/gardener-project/gardener/extensions/os-gardenlinux
+  tag: latest
+  pullPolicy: IfNotPresent
+
+resources: {}
+
+vpa:
+  enabled: true
+  resourcePolicy:
+    minAllowed:
+      memory: 64Mi
+  updatePolicy:
+    updateMode: "Auto"
+
+controllers:
+  concurrentSyncs: 5
+  ignoreOperationAnnotation: false
+  heartbeat: 
+    renewIntervalSeconds: 30 
+
+leaderElection:
+  resourceLock: leases
+
+disableControllers: []
+
+gardener:
+  version: ""
+
+# settings for metrics, e.g. scraping by seed-prometheus
+metrics:
+  # enable metrics scraping
+  enableScraping: true
+  port: 8080
